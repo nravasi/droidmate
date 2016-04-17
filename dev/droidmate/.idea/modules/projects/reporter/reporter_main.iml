@@ -54,7 +54,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$ANDROID_SDK$/platforms/android-19/android.jar!/" />
+          <root url="jar://$USER_HOME$/Library/Android/sdk/platforms/android-19/android.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

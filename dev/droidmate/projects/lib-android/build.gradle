@@ -10,23 +10,34 @@
   This project contains classes that:
   - require access to Android API: they depend on Android.jar;
   - will be compiled with legacy android ant script, requiring compatibility with Java 5
-  (this file uses jdk 6, hoping it will be equivalent to 5).
+  (this file uses jdk 6, hoping it will be equivalent to 6).
 
 */
 
-import org.droidmate.buildsrc.BuildKt
+import java.nio.file.Files
+import java.nio.file.Path
+import org.droidmate.init.InitConstants
+import org.droidmate.init.LocalInitConstants
+
+import java.nio.file.Paths
 
 apply plugin: 'java'
 
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
-compileJava.options.bootClasspath = BuildKt.jdk6_rt_jar
+compileJava.options.bootClasspath = "${LocalInitConstants.jdk6_path}/lib/rt.jar"
+compileTestJava.options.bootClasspath = compileJava.options.bootClasspath
 
 dependencies {
 
   testCompile 'junit:junit:4.12'
 
-  compile files(BuildKt.android_jar.toString())
+  File androidJarFile = new File(InitConstants.android_platform_dir.toString(), "android.jar")
+  assert androidJarFile.file
+  compile files(androidJarFile)
 
   compile project(":projects:lib-common")
+
+
 }
+
