@@ -50,6 +50,9 @@ abstract class RunnableExplorationAction implements IRunnableExplorationAction
         return new RunnableResetAppExplorationAction(action as ResetAppExplorationAction, timestamp)
         break
 
+      case EnterTextExplorationAction:
+        return new RunnableEnterTextExplorationAction(action as EnterTextExplorationAction, timestamp)
+
       case WidgetExplorationAction:
         return new RunnableWidgetExplorationAction(action as WidgetExplorationAction, timestamp)
 

@@ -167,4 +167,7 @@ class Widget implements Serializable
     return new Rectangle(lowX, lowY, highX - lowX, highY - lowY);
   }
 
+  boolean isTextField() {
+    return className.equals("android.widget.EditText");
+  }
 }

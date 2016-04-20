@@ -17,6 +17,7 @@ import org.droidmate.device.datatypes.IGuiState
 import org.droidmate.exploration.actions.ExplorationAction
 import org.droidmate.exploration.actions.WidgetExplorationAction
 
+import static org.droidmate.exploration.actions.ExplorationAction.newEnterTextExplorationAction
 import static org.droidmate.exploration.actions.ExplorationAction.newWidgetExplorationAction
 
 @Slf4j
@@ -155,7 +156,10 @@ class WidgetStrategy implements IWidgetStrategy
     assert !lastWidgetInfo.blackListed
 
     ExplorationAction action
-    if (chosenWidget.longClickable && !chosenWidget.clickable && !chosenWidget.checkable)
+    if(chosenWidget.isTextField()){
+      action = newEnterTextExplorationAction("1", chosenWidget)
+    }
+    else if (chosenWidget.longClickable && !chosenWidget.clickable && !chosenWidget.checkable)
     {
       chosenWidgetInfo.longClickedCount++
       action = newWidgetExplorationAction(chosenWidget, /* longClick */ true)

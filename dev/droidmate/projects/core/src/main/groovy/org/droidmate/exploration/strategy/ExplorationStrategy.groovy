@@ -114,10 +114,10 @@ class ExplorationStrategy implements IExplorationStrategy
     boolean exploredForward = false
     if (terminateExploration(guiState))
       outExplAction = newTerminateExplorationAction()
-    else if (resetExploration(guiState))
-      outExplAction = newResetAppExplorationAction()
-    else if (backtrack(guiState))
-      outExplAction = newPressBackExplorationAction()
+//    else if (resetExploration(guiState))
+//      outExplAction = newResetAppExplorationAction()
+//    else if (backtrack(guiState))
+//      outExplAction = newPressBackExplorationAction()
     else
     {
       outExplAction = exploreForward(guiState)
@@ -160,6 +160,9 @@ class ExplorationStrategy implements IExplorationStrategy
 
         // Otherwise the widget is not interesting (DroidMate will never do anything with it)
         boolean canBeActedUpon = w.canBeActedUpon()
+
+        break
+      case EnterTextExplorationAction:
 
         break
       case ResetAppExplorationAction:
