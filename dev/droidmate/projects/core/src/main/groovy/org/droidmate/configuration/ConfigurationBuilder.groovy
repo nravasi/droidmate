@@ -203,6 +203,8 @@ class ConfigurationBuilder implements IConfigurationBuilder
 
     cfg.reportOutputDirPath = fs.getPath(cfg.reportOutputDir)
 
+    cfg.textInputPath = fs.getPath(cfg.textInputDir)
+
     if (cfg.useApkFixturesDir)
       cfg.apksDirPath = new ResourcePath(BuildKt.apk_fixtures).path
     else

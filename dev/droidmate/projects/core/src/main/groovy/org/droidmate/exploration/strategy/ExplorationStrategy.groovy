@@ -19,6 +19,7 @@ import org.droidmate.configuration.ConfigurationBuilder
 import org.droidmate.device.datatypes.IGuiState
 import org.droidmate.exceptions.UnexpectedIfElseFallthroughError
 import org.droidmate.exploration.actions.*
+import org.droidmate.textInput.TextInputGenerator
 
 import static groovy.transform.TypeCheckingMode.SKIP
 import static org.droidmate.exploration.actions.ExplorationAction.*
@@ -369,7 +370,8 @@ class ExplorationStrategy implements IExplorationStrategy
 
   public static ExplorationStrategy build(String appPackageName, Configuration cfg)
   {
-    IWidgetStrategy widgetStrategy = new WidgetStrategy(appPackageName, cfg.randomSeed, cfg.alwaysClickFirstWidget, cfg.widgetIndexes)
+    TextInputGenerator generator = new TextInputGenerator(cfg.textInputPath, appPackageName)
+    IWidgetStrategy widgetStrategy = new WidgetStrategy(appPackageName, generator, cfg.randomSeed, cfg.alwaysClickFirstWidget, cfg.widgetIndexes)
     ITerminationCriterion terminationCriterion = new TerminationCriterion(cfg, cfg.timeLimit, Ticker.systemTicker())
     IForwardExplorationSpecialCases specialCases = new ForwardExplorationSpecialCases()
     return new ExplorationStrategy(appPackageName, cfg.resetEveryNthExplorationForward, widgetStrategy, terminationCriterion, specialCases)

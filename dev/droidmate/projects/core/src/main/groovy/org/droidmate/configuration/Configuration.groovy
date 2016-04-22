@@ -334,6 +334,8 @@ public class Configuration implements IConfiguration
   @Parameter(names = ["-widgetUniqueStringWithFieldPrecedence"], arity = 1)
   public boolean widgetUniqueStringWithFieldPrecedence = true
 
+  public String textInputDir = "." + File.separator + "textInput"
+
   //endregion
 
   //region Values set by ConfigurationBuilder
@@ -354,6 +356,7 @@ public class Configuration implements IConfiguration
 
   public Path appGuardApisList
 
+  public Path textInputPath
   /**
    * Jar with uiautomator-daemon location on the file system. The jar is to be deployed on the android (virtual) device
    * to enable GUI actions execution.

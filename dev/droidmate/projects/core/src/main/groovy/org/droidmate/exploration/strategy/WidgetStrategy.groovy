@@ -16,6 +16,7 @@ import org.droidmate.common.exploration.datatypes.Widget
 import org.droidmate.device.datatypes.IGuiState
 import org.droidmate.exploration.actions.ExplorationAction
 import org.droidmate.exploration.actions.WidgetExplorationAction
+import org.droidmate.textInput.TextInputGenerator
 
 import static org.droidmate.exploration.actions.ExplorationAction.newEnterTextExplorationAction
 import static org.droidmate.exploration.actions.ExplorationAction.newWidgetExplorationAction
@@ -33,10 +34,12 @@ class WidgetStrategy implements IWidgetStrategy
   private List<WidgetContext> widgetContexts       = []
   private WidgetContext       currentWidgetContext = null
   private WidgetInfo          lastWidgetInfo       = null
+  private TextInputGenerator inputGenerator
 
 
   WidgetStrategy(
     String exploredAppPackageName,
+    TextInputGenerator generator,
     long randomSeed,
     boolean alwaysClickFirstWidget,
     List<Integer> widgetIndexes)
@@ -46,6 +49,7 @@ class WidgetStrategy implements IWidgetStrategy
     this.random = new Random(randomSeed)
     this.alwaysClickFirstWidget = alwaysClickFirstWidget
     this.widgetIndexes = widgetIndexes
+    this.inputGenerator = generator
 
     assert !(alwaysClickFirstWidget && !widgetIndexes.empty)
   }
@@ -157,7 +161,7 @@ class WidgetStrategy implements IWidgetStrategy
 
     ExplorationAction action
     if(chosenWidget.isTextField()){
-      action = newEnterTextExplorationAction("1", chosenWidget)
+      action = newEnterTextExplorationAction(inputGenerator.getTextForId(chosenWidget.resourceId), chosenWidget)
     }
     else if (chosenWidget.longClickable && !chosenWidget.clickable && !chosenWidget.checkable)
     {
