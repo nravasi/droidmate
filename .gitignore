@@ -60,3 +60,7 @@ uiautomator2-daemon-test.apk
 out.txt
 **/test_artifacts/temp/
 temp_extracted_resources
+*.gitignore
+*.name
+*.xml
+.idea

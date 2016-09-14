@@ -32,7 +32,7 @@ import kotlin.comparisons.naturalOrder
 
 fun plot(dataFilePath: String, outputFilePath: String) {
 
-  require(Paths.get(dataFilePath).isRegularFile, {"Paths.get(dataFilePath='$dataFilePath').isRegularFile"})
+  /*require(Paths.get(dataFilePath).isRegularFile, {"Paths.get(dataFilePath='$dataFilePath').isRegularFile"})
   require(Paths.get(outputFilePath).parent.isDirectory, {"Paths.get(outputFilePath='$outputFilePath').parent.isDirectory"})
   
   val processExecutor = ProcessExecutor()
@@ -49,7 +49,7 @@ fun plot(dataFilePath: String, outputFilePath: String) {
     "var_output_file_path='$outputFilePath'")
     .joinToString(";")
   val result = processExecutor.command("gnuplot", "-e", variableBindings, plotTemplatePathString).execute()
-  check(result.exitValue == 0)
+  check(result.exitValue == 0)*/
 }
 
 fun <V> buildTable(headers: Iterable<String>, rowCount: Int, computeRow: (Int) -> Iterable<V>): Table<Int, String, V> {

@@ -26,13 +26,11 @@ package org.droidmate.monitor;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
+import android.text.TextUtils;
 import org.droidmate.apis.Api;
 import org.droidmate.misc.MonitorConstants;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.lang.reflect.Array;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -40,6 +38,9 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.io.OutputStreamWriter;
+import java.io.FileOutputStream;
+import java.io.File;
 
 // org.droidmate.monitor.MonitorSrcTemplate:API_19_UNCOMMENT_LINES
 // import de.uds.infsec.instrumentation.Instrumentation;
@@ -205,16 +206,26 @@ public class MonitorJavaTemplate
       {
         Log.v(MonitorConstants.tag_srv, "OnServerRequest(" + input + ")");
 
+        Log.v(MonitorConstants.tag_srv, "NACHOOOOOOO1");
+
         removeSocketInitLogFromMonitorTCPServerAndValidateLogsAreNotFromTCPServer(currentLogs);
 
+        Log.v(MonitorConstants.tag_srv, "NACHOOOOOOO2");
         if (MonitorConstants.srvCmd_connCheck.equals(input))
         {
+
+          Log.v(MonitorConstants.tag_srv, "NACHOOOOOOO3");
           final ArrayList<String> payload = new ArrayList<String>(Arrays.asList(getPid(), getPackageName(), ""));
+          Log.v(MonitorConstants.tag_srv, "NACHOOOOOOO4");
           return new ArrayList<ArrayList<String>>(Collections.singletonList(payload));
 
         } else if (MonitorConstants.srvCmd_get_logs.equals(input))
         {
+          Log.v(MonitorConstants.tag_srv, "NACHOOOOOOO5");
           ArrayList<ArrayList<String>> logsToSend = new ArrayList<ArrayList<String>>(currentLogs);
+
+          Log.v(MonitorConstants.tag_srv, "NACHOOOOOOO6");
+
           currentLogs.clear();
 
           return logsToSend;
@@ -656,8 +667,22 @@ public class MonitorJavaTemplate
   {
     synchronized (currentLogs)
     {
-//      Log.v(tag_srv, "addCurrentLogs(" + payload + ")");
+
+      Log.v(MonitorConstants.tag_srv, "aAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      String filename = "nachitooooooooooo";
+      String string = "Hello world!";
+      FileOutputStream outputStream;
       String now = getNowDate();
+      try {
+        outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
+        outputStream.write(TextUtils.join(";", Arrays.asList(getPid(), now, payload, "\n")).getBytes());
+        outputStream.close();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+//      Log.v(tag_srv, "addCurrentLogs(" + payload + ")");
+
 
 //      Log.v(tag_srv, "currentLogs.add(new ArrayList<String>(Arrays.asList(getPid(), now, payload)));");
       currentLogs.add(new ArrayList<String>(Arrays.asList(getPid(), now, payload)));
