@@ -64,3 +64,12 @@ temp_extracted_resources
 *.name
 *.xml
 .idea
+/dev/droidmate/.idea/*.gitignore
+/dev/droidmate/.idea/*.name
+/dev/droidmate/.idea/*.xml
+/dev/droidmate/.idea/copyright/*.xml
+/dev/droidmate/.idea/dictionaries/*.xml
+/dev/droidmate/.idea/inspectionProfiles/*.xml
+/dev/droidmate/.idea/modules/DummyAndroidApp/*.iml
+/dev/droidmate/.idea/runConfigurations/*.xml
+/dev/droidmate/.idea/scopes/*.xml
