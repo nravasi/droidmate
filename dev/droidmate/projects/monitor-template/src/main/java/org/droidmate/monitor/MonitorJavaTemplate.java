@@ -25,8 +25,9 @@ package org.droidmate.monitor;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
+import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 import org.droidmate.apis.Api;
 import org.droidmate.misc.MonitorConstants;
 
@@ -38,9 +39,6 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.io.OutputStreamWriter;
-import java.io.FileOutputStream;
-import java.io.File;
 
 // org.droidmate.monitor.MonitorSrcTemplate:API_19_UNCOMMENT_LINES
 // import de.uds.infsec.instrumentation.Instrumentation;
@@ -667,14 +665,13 @@ public class MonitorJavaTemplate
   {
     synchronized (currentLogs)
     {
-
-      Log.v(MonitorConstants.tag_srv, "aAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-      String filename = "nachitooooooooooo";
-      String string = "Hello world!";
-      FileOutputStream outputStream;
       String now = getNowDate();
+
       try {
-        outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
+        Log.e("±±", Environment.getExternalStorageDirectory().getPath());
+        File filename = new File(Environment.getExternalStorageDirectory().getPath(), "logsout.txt");
+        FileOutputStream outputStream;
+        outputStream = new FileOutputStream(filename, true);
         outputStream.write(TextUtils.join(";", Arrays.asList(getPid(), now, payload, "\n")).getBytes());
         outputStream.close();
       } catch (Exception e) {

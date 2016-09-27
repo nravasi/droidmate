@@ -6,5 +6,7 @@ This file is necessary because of gradle 'com.android.application' plugin.
  which is necessary to allow access to Sockets and to change the Wifi state
 -->
 
-<manifest package="org.droidmate.monitor">
+<manifest package="org.droidmate.monitor"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 </manifest>
