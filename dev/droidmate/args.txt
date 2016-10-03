@@ -1,1 +1,1 @@
--apksDir=apks/inlined  -resetEvery=15 -timeLimit=120 -randomSeed=0 -androidApi=api19
+-apksDir=apks/inlined  -resetEvery=50 -randomSeed=0 -androidApi=api19 -timeLimit 60

@@ -109,6 +109,7 @@ public class MonitorJavaTemplate
 
   private static MonitorTCPServer server;
   private static Context context;
+  private static String appname;
 
   /**
    * Called by the inlined Application class when the inlined AUE launches activity, as done by
@@ -118,6 +119,8 @@ public class MonitorJavaTemplate
   public void init(android.content.Context initContext)
   {
     context = initContext;
+    appname = context.getApplicationInfo().loadLabel(context.getPackageManager()).toString();
+
     if (server == null)
     {
       Log.i(MonitorConstants.tag_srv, "Init: Didn't set context for MonitorTCPServer, as the server is null.");
@@ -669,7 +672,8 @@ public class MonitorJavaTemplate
 
       try {
         Log.e("±±", Environment.getExternalStorageDirectory().getPath());
-        File filename = new File(Environment.getExternalStorageDirectory().getPath(), "logsout.txt");
+        File filename = new File(Environment.getExternalStorageDirectory().getPath() + "/logs", appname + ".txt");
+        filename.getParentFile().mkdirs();
         FileOutputStream outputStream;
         outputStream = new FileOutputStream(filename, true);
         outputStream.write(TextUtils.join(";", Arrays.asList(getPid(), now, payload, "\n")).getBytes());
