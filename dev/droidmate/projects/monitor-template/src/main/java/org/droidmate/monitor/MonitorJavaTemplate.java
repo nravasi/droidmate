@@ -40,6 +40,9 @@ import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static android.R.string.no;
+import static javafx.scene.input.KeyCode.F;
+
 // org.droidmate.monitor.MonitorSrcTemplate:API_19_UNCOMMENT_LINES
 // import de.uds.infsec.instrumentation.Instrumentation;
 // import de.uds.infsec.instrumentation.annotation.Redirect;
@@ -119,7 +122,7 @@ public class MonitorJavaTemplate
   public void init(android.content.Context initContext)
   {
     context = initContext;
-    appname = context.getApplicationInfo().loadLabel(context.getPackageManager()).toString();
+    appname = context.getApplicationInfo().loadLabel(context.getPackageManager()).toString().replace(" ", "_");
 
     if (server == null)
     {
@@ -671,9 +674,16 @@ public class MonitorJavaTemplate
       String now = getNowDate();
 
       try {
-        Log.e("±±", Environment.getExternalStorageDirectory().getPath());
-        File filename = new File(Environment.getExternalStorageDirectory().getPath() + "/logs", appname + ".txt");
-        filename.getParentFile().mkdirs();
+        String state = Environment.getExternalStorageState();
+
+        Log.e("±±", "External " + Environment.getExternalStorageDirectory().canWrite());
+        File filename = new File(Environment.getExternalStorageDirectory() + "/logs", appname + ".txt");
+        Log.e("±±path es", filename.getPath());
+        boolean mkdirs = filename.getParentFile().mkdirs();
+        if(!mkdirs){
+          Log.e("±±", "no pude zer!!!!");
+        }
+        filename.createNewFile();
         FileOutputStream outputStream;
         outputStream = new FileOutputStream(filename, true);
         outputStream.write(TextUtils.join(";", Arrays.asList(getPid(), now, payload, "\n")).getBytes());
